@@ -2,12 +2,17 @@
 
 namespace app;
 
+use app\base\AppTrait;
 use app\container\Container;
 use app\container\JsonServiceFactory;
 use app\web\Response;
 use app\web\Router;
 
 class App {
+
+    use AppTrait;
+
+    public static $instance;
 
     public static $container;
 
@@ -17,10 +22,12 @@ class App {
 
     public function __construct()
     {
-        static::$container = Container::instance(new JsonServiceFactory(constant('CONFIG_ROOT').'/services.json'));
+        self::$instance = $this;
 
-        static::$response = Response::instance();
+        self::$container = Container::instance(new JsonServiceFactory(constant('CONFIG_ROOT').'/services.json'));
+
+        self::$response = Response::instance();
         
-        static::$router = Router::instance();
+        self::$router = Router::instance();
     }
 }

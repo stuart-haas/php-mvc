@@ -14,7 +14,7 @@ class DefaultController extends BaseController {
 
     public function index() 
     {
-        $data = App::$container->get('apiService')->getData();
+        $data = App::$instance->api()->getData();
 
         return $this->getJson($data);
     }
