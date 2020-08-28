@@ -1,6 +1,11 @@
 {
     "name": "stuarthaas/php-test",
     "minimum-stability": "dev",
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit --testdox tests"
+        ]
+    },
     "config": {
         "sort-packages": true,
         "optimize-autoloader": true,
@@ -15,5 +20,8 @@
   },
     "require": {
         "twig/twig": "^2.12"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
     }
 }

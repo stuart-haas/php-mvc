@@ -11,10 +11,7 @@ class Response {
         return new Response();
     }
 
-    private function __construct()
-    {
-        
-    }
+    public function __construct(){}
 
     public function sendJson($data)
     {
