@@ -18,4 +18,9 @@ class DefaultController extends BaseController {
 
         return $this->getJson($data);
     }
+
+    public function view()
+    {
+        return $this->renderView('index', ['title' => 'Hello World!']);
+    }
 }

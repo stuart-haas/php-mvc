@@ -24,7 +24,7 @@ class App {
     {
         self::$instance = $this;
 
-        self::$container = Container::instance(new JsonServiceFactory(constant('CONFIG_ROOT').'/services.json'));
+        self::$container = Container::instance(new JsonServiceFactory(CONFIG_ROOT . DIRECTORY_SEPARATOR . 'services.json'));
 
         self::$response = Response::instance();
         

@@ -32,6 +32,10 @@ class Router {
         $this->controller = Url::segments(1);
         $this->action = Url::segments(2);
 
+        if(is_null($this->url)) {
+            $this->url = '';
+        }
+
         if(empty($this->controller)) {
             $this->controller = 'default';
         }
@@ -40,7 +44,7 @@ class Router {
             $this->action = 'index';
         }
         
-        $files = scandir(constant('CONTROLLER_ROOT'));
+        $files = scandir(CONTROLLER_ROOT);
         $files = array_diff($files, array('.', '..'));
         foreach($files as $filename) {
             $controller = basename($filename, '.php');

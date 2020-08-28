@@ -22,7 +22,12 @@ abstract class BaseController {
 
     public function getJson($data) 
     {
-        return App::$response->send($data);
+        return App::$response->sendJson($data);
+    }
+
+    public function renderView($template, $data)
+    {
+        return App::$response->sendView($template, $data);
     }
 
     public static function namespace() 
