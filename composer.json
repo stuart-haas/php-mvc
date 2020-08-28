@@ -12,5 +12,8 @@
       "psr-4": {
           "app\\": "src/"
       }
-  }
+  },
+    "require": {
+        "twig/twig": "^2.12"
+    }
 }

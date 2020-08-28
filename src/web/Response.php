@@ -2,6 +2,8 @@
 
 namespace app\web;
 
+use app\App;
+
 class Response {
 
     public static function instance() 
@@ -27,17 +29,6 @@ class Response {
 
     public function sendView($template, $data)
     {
-        extract($data);
-        
-        ob_start();
-
-        header_remove();
-        header('Content-Type: text/html');
-
-        include(VIEW_ROOT . DIRECTORY_SEPARATOR . $template . '.html');
-        
-        $content = ob_get_contents();
-        ob_end_clean();
-        echo $content;
+        echo App::$template->render($template, $data);
     }
 }
