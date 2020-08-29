@@ -8,7 +8,6 @@ use app\controllers\BaseController;
 class Router {
 
     private $url;
-    private $controllers;
     private $controller;
     private $namespace;
     private $action;
@@ -44,28 +43,20 @@ class Router {
             $this->action = 'index';
         }
         
-        $files = scandir(CONTROLLER_ROOT);
-        $files = array_diff($files, array('.', '..'));
-        foreach($files as $filename) {
-            $controller = basename($filename, '.php');
-            $this->controllers[] = $controller;
-        }
-
-        $this->createController();
-    }
-
-    private function createController()
-    {
         $controller = ucfirst($this->controller) . 'Controller';
-        $this->controller = $this->namespace.'\\'.$controller;
-        if(class_exists($this->controller)) {
-            if(in_array($controller, $this->controllers)) {
-                if(method_exists($this->controller, $this->action)) {
-                    $controller = new $this->controller($this->url, $this->action);
-                    $controller->runAction();
-                } else {
-                    throw new \Exception("Method {$this->action} does not exist.");
-                }
+
+        if(file_exists(CONTROLLER_ROOT . DIRECTORY_SEPARATOR . $controller . '.php')) {
+            $this->controller = $this->namespace.'\\'.$controller;
+            if(class_exists($this->controller)) {
+                    if(method_exists($this->controller, $this->action)) {
+                        $controller = new $this->controller($this->url, $this->action);
+                        $controller->runAction();
+                    } else {
+                        throw new \Exception("Method {$this->action} does not exist.");
+                    }
+            
+            } else {
+                throw new \Exception("Controller {$this->controller} not found.");
             }
         } else {
             throw new \Exception("Controller {$this->controller} not found.");
